@@ -8,11 +8,19 @@
 import SwiftUI
 import SwiftData
 
+
+enum SortOrder: String, Identifiable, CaseIterable {
+    case status, title, remark
+    
+    var id: Self {
+        self
+    }
+}
 struct ObjectiveListScreen: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var objectives: [Objective]
     @State private var title: String = ""
-    @State private var showAddObjective: Bool = false
+    @State private var showAddObjectiveSheet: Bool = false
     @State private var showEditObjective: Bool = false
     @State private var remark: String = ""
     
@@ -24,6 +32,7 @@ struct ObjectiveListScreen: View {
                     NavigationLink {
                         Text("Objective at \(objective.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
                     } label: {
+                        ///ObjectiveCard with Details
                         Text(objective.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
                     }
                 }
@@ -38,35 +47,42 @@ struct ObjectiveListScreen: View {
                     EditButton()
                 }
                 ToolbarItem(placement: .principal) {
-                    HeaderView()
+                    HeaderView().padding(.horizontal,1)
                 }
 #endif
                 ToolbarItem {
                     Button(action: addObjective) {
                         Label("Add Objective", systemImage: "plus")
+                      
                     }
                 }
             }
         } detail: {
             Text("Select an objective to view details.")
         }
-    }
-
-    private func addObjective() {
-        withAnimation {
-            let newObjective = Objective(title: title, remark: remark, timestamp: Date())
-            modelContext.insert(newObjective)
+        .sheet(isPresented: $showAddObjectiveSheet) {
+         
+            AddObjectiveView()
+                .presentationDetents([.height(350)])
         }
     }
-
-    private func deleteObjectives(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(objectives[index])
+        private func addObjective() {
+            HapticManager.notification(type: .success)
+            withAnimation {
+                showAddObjectiveSheet = true
+//                let newObjective = Objective(title: title, remark: remark, timestamp: Date())
+//                modelContext.insert(newObjective)
+            }
+        }
+        
+        private func deleteObjectives(offsets: IndexSet) {
+            withAnimation {
+                for index in offsets {
+                    modelContext.delete(objectives[index])
+                }
             }
         }
     }
-}
 
 #Preview {
     ObjectiveListScreen()

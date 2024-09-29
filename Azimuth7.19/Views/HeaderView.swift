@@ -15,7 +15,7 @@ struct HeaderView: View {
                 .font(.title3)
                 .fontWeight(.bold)
                                .padding(.leading, 10)
-                               .foregroundColor(.secondary)
+                               .foregroundColor(.primary)
                                .offset(x: 7, y: -2)
             Text("Objectives")
                 .font(.largeTitle)

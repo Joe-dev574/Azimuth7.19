@@ -5,19 +5,26 @@
 //  Created by Joseph DeWeese on 9/29/24.
 //
 
-import Foundation
+import SwiftUI
 import SwiftData
 
 @Model
 class Note {
-    var creationDate: Date = Date.now
-    var text: String
-    var page: String?
-    
-    init(text: String, page: String? = nil) {
-        self.text = text
-        self.page = page
+    init(colorString: String, noteTitle: String, content: String) {
+        self.colorString = colorString
+        self.noteTitle = noteTitle
+        self.content = content
     }
     
-    var objective: Objective?
+    var id: String = UUID().uuidString
+    var dateCreated: Date = Date()
+    var colorString: String
+    var noteTitle: String
+    var content: String
+    /// View Properties
+    var allowsHitTesting: Bool = false
+    
+    var color: Color {
+        Color(colorString)
+    }
 }
