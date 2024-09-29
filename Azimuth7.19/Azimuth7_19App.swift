@@ -12,7 +12,7 @@ import SwiftData
 struct Azimuth7_19App: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Objective.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -25,7 +25,7 @@ struct Azimuth7_19App: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ObjectiveListScreen()
         }
         .modelContainer(sharedModelContainer)
     }
