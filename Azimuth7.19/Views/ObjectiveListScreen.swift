@@ -23,7 +23,14 @@ struct ObjectiveListScreen: View {
     @State private var showAddObjectiveSheet: Bool = false
     @State private var showEditObjective: Bool = false
     @State private var remark: String = ""
-    
+    /// View Properties
+    @State private var searchText: String = ""
+    @State private var selectedNote: Note?
+    @State private var deleteNote: Note?
+    @State private var animateView: Bool = false
+    @FocusState private var isKeyboardActive: Bool
+    @State private var titleNoteSize: CGSize = .zero
+    @Namespace private var animation
     
     var body: some View {
         NavigationSplitView {
@@ -70,8 +77,7 @@ struct ObjectiveListScreen: View {
             HapticManager.notification(type: .success)
             withAnimation {
                 showAddObjectiveSheet = true
-//                let newObjective = Objective(title: title, remark: remark, timestamp: Date())
-//                modelContext.insert(newObjective)
+
             }
         }
         
