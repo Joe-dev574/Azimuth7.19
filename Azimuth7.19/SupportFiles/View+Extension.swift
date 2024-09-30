@@ -11,4 +11,9 @@ extension View {
     var noteAnimation: Animation {
         .smooth(duration: 0.3, extraBounce: 0)
     }
-}
+        var objectiveAnimation: Animation {
+            .smooth(duration: 0.3, extraBounce: 0)
+        }
+    }
+
+

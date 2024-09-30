@@ -17,10 +17,10 @@ struct HeaderView: View {
                                .padding(.leading, 10)
                                .foregroundColor(.primary)
                                .offset(x: 7, y: -2)
-            Text("Objectives")
+            Text("Azimuth")
                 .font(.largeTitle)
                         .fontWeight(.heavy)
-                        .foregroundStyle(.volsOrange)
+                        .foregroundStyle(.blue)
             
             Spacer()
         }

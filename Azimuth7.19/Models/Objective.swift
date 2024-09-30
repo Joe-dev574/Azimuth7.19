@@ -10,6 +10,7 @@ import SwiftData
 
 @Model
 final class Objective {
+    var id: String = UUID().uuidString
     var title: String
     var remark: String
     var timestamp: Date
@@ -22,7 +23,7 @@ final class Objective {
     var notes: [Note]?
     @Relationship(inverse: \Tag.objectives)
     var tags: [Tag]?
-   
+    var allowsHitTesting: Bool = false
     
     init(
         title: String,

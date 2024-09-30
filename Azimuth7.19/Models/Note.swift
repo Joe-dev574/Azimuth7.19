@@ -22,7 +22,7 @@ class Note {
     var noteTitle: String
     var content: String
     /// View Properties
-    var allowsHitTesting: Bool = false
+ 
     
     var color: Color {
         Color(colorString)
